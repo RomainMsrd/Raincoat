@@ -18,7 +18,7 @@ from sklearn.metrics import classification_report, accuracy_score
 from dataloader.uni_dataloader import data_generator
 from configs.data_model_configs import get_dataset_class
 from configs.hparams import get_hparams_class
-from utils import fix_randomness, copy_Files, starting_logs, save_checkpoint, _calc_metrics, calculate_risk
+from algorithms.utils import fix_randomness, copy_Files, starting_logs, save_checkpoint, _calc_metrics, calculate_risk
 from algorithms.algorithms import get_algorithm_class
 from models.models import get_backbone_class
 from sklearn.metrics import f1_score
@@ -142,6 +142,7 @@ class cross_domain_trainer(object):
                     self.trg_true_labels = tar_uni_label_test
                     acc, f1, H = self.detect_private(dis2proto_a_test, dis2proto_c_test, tar_uni_label_test, c_list)
                 log = {'scenario': i, 'run_id': run_id, 'accuracy': acc, 'f1': f1, 'H-score': H}
+                print(log)
                 df_c = df_c.append(log, ignore_index=True)
         self.save_result(df_a, 'average_align.csv')
         self.save_result(df_c, 'average_correct.csv')
@@ -198,7 +199,7 @@ class cross_domain_trainer(object):
         return c_list
 
     def calc_distance(self, len_y, dataloader):
-        feature_extractor = self.algorithm.encoder.to(self.device)
+        feature_extractor = self.algorithm.feature_extractor.to(self.device)
         classifier = self.algorithm.classifier.to(self.device)
         feature_extractor.eval()
         classifier.eval()
@@ -247,7 +248,7 @@ class cross_domain_trainer(object):
 
     # @Romain: TFAC probably old name of RAINCOAT --> commit 5 Feb
     def evaluate_tfac(self, labels):
-        feature_extractor = self.algorithm.encoder.to(self.device)
+        feature_extractor = self.algorithm.feature_extractor.to(self.device)
         classifier = self.algorithm.classifier.to(self.device)
         feature_extractor.eval()
         classifier.eval()

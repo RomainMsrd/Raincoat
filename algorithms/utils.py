@@ -127,16 +127,17 @@ def copy_Files(destination):
     destination_dir = os.path.join(destination, "MODEL_BACKUP_FILES")
     os.makedirs(destination_dir, exist_ok=True)
     copy("main.py", os.path.join(destination_dir, "main.py"))
-    copy("utils.py", os.path.join(destination_dir, "utils.py"))
-    copy(f"trainer.py", os.path.join(destination_dir, f"trainer.py"))
-    copy(f"same_domain_trainer.py", os.path.join(destination_dir, f"same_domain_trainer.py"))
+    copy("algorithms/utils.py", os.path.join(destination_dir, "utils.py"))
+    copy(f"trainers/trainer.py", os.path.join(destination_dir, f"trainer.py"))
+    copy(f"trainers/trainer_uni.py", os.path.join(destination_dir, f"trainer_uni.py"))
+    copy(f"trainers/same_domain_trainer.py", os.path.join(destination_dir, f"same_domain_trainer.py"))
     copy("dataloader/dataloader.py", os.path.join(destination_dir, "dataloader.py"))
     copy(f"models/models.py", os.path.join(destination_dir, f"models.py"))
     copy(f"models/loss.py", os.path.join(destination_dir, f"loss.py"))
     copy("algorithms/algorithms.py", os.path.join(destination_dir, "algorithms.py"))
     copy(f"configs/data_model_configs.py", os.path.join(destination_dir, f"data_model_configs.py"))
     copy(f"configs/hparams.py", os.path.join(destination_dir, f"hparams.py"))
-    copy(f"configs/sweep_params.py", os.path.join(destination_dir, f"sweep_params.py"))
+    #copy(f"configs/sweep_params.py", os.path.join(destination_dir, f"sweep_params.py"))
 
 
 
